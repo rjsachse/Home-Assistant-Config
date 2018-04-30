@@ -1,4 +1,4 @@
-!www/
+!www/*
 !README.md
 !.travis.yml
 !*.yaml
