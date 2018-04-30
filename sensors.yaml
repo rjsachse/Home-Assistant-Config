@@ -1,0 +1,10 @@
+  - platform: yr
+
+  - platform: deluge
+    host: 192.168.0.104
+    username: !secret torrent_username
+    password: !secret torrent_password
+    monitored_variables:
+      - 'current_status'
+      - 'download_speed'
+      - 'upload_speed'

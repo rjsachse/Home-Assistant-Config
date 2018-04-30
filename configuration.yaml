@@ -1,0 +1,68 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: metric
+  time_zone: !secret time_zone
+  customize: !include customize.yaml
+
+frontend:
+
+config:
+
+updater:
+
+# Mosquitto MQTT Broker
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  protocol: 3.1
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+conversation:
+
+history:
+
+logbook:
+
+map:
+
+sun:
+
+tts:
+  - platform: google
+
+cloud:
+
+switch:
+  - platform: deluge
+    host: 192.168.0.104
+    port: 8080
+    username: !secret torrent_username
+    password: !secret torrent_password
+
+notify:
+  - platform: kodi
+    name: Kodi-notify
+    host: 192.168.0.104
+    port: 8080
+    username: !secret mp_username
+    password: !secret mp_password
+
+# Media Player
+media_player:
+  - platform: kodi
+    name: Kodi
+    host: 192.168.0.104
+    port: 8080
+    username: !secret mp_username
+    password: !secret mp_password
+
+panel_iframe: !include panel.yaml
+sensor: !include sensors.yaml
+light: !include lights.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

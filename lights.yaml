@@ -1,0 +1,19 @@
+  - name: "Kitchen"
+    command_topic: milight/0x168B/rgb_cct/1
+    state_topic: milight/state/0x168B/rgb_cct/1
+
+    <<: &MILIGHT_PARAMS
+      platform: mqtt_json
+      color_temp: true
+      rgb: true
+      brightness: true
+
+  - name: "Lounge"
+    command_topic: milight/0x168B/rgb_cct/2
+    state_topic: milight/state/0x168B/rgb_cct/2
+    <<: *MILIGHT_PARAMS
+
+  - name: "Bedroom"
+    command_topic: milight/0x168B/rgb_cct/3
+    state_topic: milight/state/0x168B/rgb_cct/3
+    <<: *MILIGHT_PARAMS
