@@ -8,6 +8,8 @@ homeassistant:
   customize: !include customize.yaml
 
 frontend:
+  extra_html_url:
+    - /local/custom_ui/state-card-floorplan.html
 
 config:
 
@@ -59,6 +61,18 @@ media_player:
     port: 8080
     username: !secret mp_username
     password: !secret mp_password
+
+binary_sensor:
+  - platform: mqtt
+    state_topic: dummy/floorplan/sensor
+    name: Floorplan
+
+panel_custom:
+  - name: floorplan
+    sidebar_title: Floorplan
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include floorplan.yaml
 
 panel_iframe: !include panel.yaml
 sensor: !include sensors.yaml
