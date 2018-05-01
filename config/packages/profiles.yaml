@@ -1,0 +1,119 @@
+## Profiles/Modes Module
+
+##################################################
+## Customize
+##################################################
+
+homeassistant:
+  customize:
+    input_number.onsleep_delay:
+      extra_badge:
+        entity_id: input_number.onsleep_delay
+        unit: min
+        blacklist_states: 0
+
+
+##################################################
+## Inputs
+##################################################
+
+input_select:
+  ha_mode:
+    name: Mode
+    icon: mdi:account-settings
+    options:
+     - Normal
+     - Visitors
+     - Show off
+     - Developer
+    initial: Normal
+
+input_boolean:
+  onarrive_presence:
+    name: Presence detection
+    icon: mdi:account-check
+    initial: on
+  onarrive_ac:
+    name: Turn on AC
+    icon: mdi:fan
+    initial: on
+  
+  onsleep_music:
+    name: Music
+    icon: mdi:music
+    initial: on
+
+input_number:
+  onsleep_delay:
+    name: Delay
+    icon: mdi:timer-sand
+    initial: 50
+    min: 0
+    max: 55
+    step: 5
+
+    
+##################################################
+## Groups
+##################################################
+
+group:
+  profile_onarrive:
+    name: On Arrive Home
+    entities:
+      - input_boolean.onarrive_presence
+      - input_boolean.onarrive_ac
+      
+  profile_onsleep:
+    name: On Sleep
+    entities:
+      - input_boolean.onsleep_music
+      - input_number.onsleep_delay
+
+
+##################################################
+## Switchs
+##################################################
+
+switch:
+  - platform: template
+    switches:
+      mode_developer:
+        value_template: "{{ is_state('input_select.ha_mode', 'Developer') }}"
+        turn_on:
+          - service: script.mode_developer
+        turn_off:
+          - service: script.mode_normal
+
+          
+##################################################
+## Scripts
+##################################################
+
+script:
+
+  # Mode Developer
+  mode_developer:
+    alias: Start Developer mode
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ha_mode
+          option: Developer
+      - service: group.set_visibility
+        entity_id: group.developer
+        data:
+          visible: True
+
+  # Mode Normal. Called in Startup (config/packages/ha_triggers.yaml)
+  mode_normal:
+    alias: Back to Normal mode
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ha_mode
+          option: Normal
+      - service: group.set_visibility
+        entity_id: group.developer
+        data:
+          visible: False

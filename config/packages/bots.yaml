@@ -1,0 +1,40 @@
+## Bots Module
+
+## https://home-assistant.io/components/telegram_bot/
+## https://community.home-assistant.io/t/telegram-inline-keyboard-broken/20268/3
+## https://core.telegram.org/bots
+
+
+##################################################
+## Components
+##################################################
+
+telegram_bot:
+  # https://home-assistant.io/components/notify.telegram/
+  # https://core.telegram.org/bots
+  - platform: polling
+    api_key: !secret telegram_key
+    allowed_chat_ids:
+      - !secret telegram_chat_id01
+
+
+##################################################
+## Automations
+##################################################
+
+automation:
+  - alias: Bot cmd 001
+    hide_entity: true
+    trigger:
+      - platform: event
+        #event_type: telegram_command
+        event_type: telegram_callback
+        event_data:
+          command: '/tv'
+    action:
+      - service: python_script.telegram_callback
+        data_template: 
+          event: '{{ trigger.event }}'
+      - service: notify.telegram
+        data:
+          message: 'Feito'

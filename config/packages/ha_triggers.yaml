@@ -1,0 +1,22 @@
+## Triggers Module
+
+##################################################
+## Automations
+##################################################
+
+automation:
+
+  # Startup
+  - alias: 'Startup'
+    hide_entity: True
+    initial_state: 'on'    
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - service: frontend.set_theme
+        data:
+          name: darkblue
+      - service: script.mode_normal
+      - service: python_script.activity
+      - service: python_script.summary
