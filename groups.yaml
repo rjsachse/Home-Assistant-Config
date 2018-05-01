@@ -1,4 +1,12 @@
 zones:
+  view: yes
   name: Zones
   entities:
     - binary_sensor.floorplan
+
+lights:
+  view: yes
+  name: Lights
+  entities:
+    - light.kitchen
+    - light.lounge

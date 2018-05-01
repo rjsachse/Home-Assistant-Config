@@ -10,6 +10,9 @@ homeassistant:
 frontend:
   extra_html_url:
     - /local/custom_ui/state-card-floorplan.html
+    - /local/custom_ui/state-card-tiles.html
+  extra_html_url_es5:
+    - /local/custom_ui/state-card-tiles_es5.html
 
 config:
 
@@ -66,6 +69,10 @@ binary_sensor:
   - platform: mqtt
     state_topic: dummy/floorplan/sensor
     name: Floorplan
+
+input_boolean:
+  dummy_tiles:
+  switch1:
 
 panel_custom:
   - name: floorplan
