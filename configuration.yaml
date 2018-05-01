@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret elevation
   unit_system: metric
   time_zone: !secret time_zone
-  customize: !include customize.yaml
+  customize: !include config/customize.yaml
 
 frontend:
   extra_html_url:
@@ -79,11 +79,11 @@ panel_custom:
     sidebar_title: Floorplan
     sidebar_icon: mdi:home
     url_path: floorplan
-    config: !include floorplan.yaml
+    config: !include config/floorplan.yaml
 
-panel_iframe: !include panel.yaml
-sensor: !include sensors.yaml
-light: !include lights.yaml
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+panel_iframe: !include config/panel.yaml
+sensor: !include config/sensors.yaml
+light: !include config/lights.yaml
+group: !include config/groups.yaml
+automation: !include config/automations.yaml
+script: !include config/scripts.yaml
