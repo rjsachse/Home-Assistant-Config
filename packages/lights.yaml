@@ -1,0 +1,31 @@
+
+
+light:
+  - platform: yeelight
+    devices:
+      192.168.0.161:
+        name: BedRoom
+        transition: 1000
+        use_music_mode: True #(defaults to False)
+        save_on_change: False #(defaults to True)
+
+  - name: "Kitchen"
+    command_topic: milight/0x168B/rgb_cct/1
+    state_topic: milight/state/0x168B/rgb_cct/1
+    <<: &MILIGHT_PARAMS
+      platform: mqtt_json
+      color_temp: true
+      rgb: true
+      brightness: true
+      effect: true
+      effect_list:
+        - white_mode
+        - night_mode
+        - 0
+        - 1
+        - 3
+
+  - name: "Lounge"
+    command_topic: milight/0x168B/rgb_cct/2
+    state_topic: milight/state/0x168B/rgb_cct/2
+    <<: *MILIGHT_PARAMS

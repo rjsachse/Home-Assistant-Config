@@ -1,9 +1,0 @@
-kodi:
-  title: 'Kodi'
-  url: 'https://192.168.0.104:8080'
-  icon: mdi:kodi
-
-milighthub:
-  title: 'milightHub'
-  url: 'https://192.168.0.147:88'
-  icon: mdi:tune

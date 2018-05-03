@@ -1,0 +1,160 @@
+## Control Panel Module
+
+## About state-card-tiles
+## Original forum thread: https://community.home-assistant.io/t/custom-ui-button-panel/29513
+## Official repo: https://github.com/c727/home-assistant-tiles
+
+## Useful links
+## Easy way to generate image for a tile: https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+## Color blend: https://meyerweb.com/eric/tools/color-blend/
+
+##################################################
+## Customize
+##################################################
+
+homeassistant:
+  customize:
+    sensor.kodi_template:
+      custom_ui_state_card: state-card-text
+       
+    # Kodi
+    script.remote_control_kodi:
+      custom_ui_state_card: state-card-tiles
+      config:
+        columns: 3
+        row_height: 75px
+        column_width: 62px
+        gap: 15px
+        color: '#555B65'
+        entities:
+          # Line 1
+          - entity: script.kodi_play_something
+            icon: mdi:library-music
+            column: 1
+            row: 1
+          - entity: script.kodi_tvshows
+            icon: mdi:mdi:movie
+            column: 2
+            row: 1
+          - entity: script.kodi_tv_off
+            icon: mdi:mdi:power
+            column: 3
+            row: 1
+          
+          # Line 2
+          - entity: script.kodi_home
+            icon: mdi:home
+            column: 1
+            row: 2
+          - entity: script.kodi_cmd
+            data: { value: Input.Up }
+            icon: mdi:arrow-up
+            column: 2
+            row: 2
+          - entity: script.kodi_playpause
+            icon: mdi:play-pause
+            column: 3
+            row: 2
+            
+          # Line 3
+          - entity: script.kodi_cmd
+            data: { value: Input.Left }
+            icon: mdi:arrow-left
+            column: 1
+            row: 3
+          - entity: script.kodi_cmd
+            data: { value: Input.ExecuteAction }
+            icon: mdi:circle-outline
+            column: 2
+            row: 3
+          - entity: script.kodi_cmd
+            data: { value: Input.Right }
+            icon: mdi:arrow-right
+            column: 3
+            row: 3
+            
+          # Line 4
+          - entity: script.kodi_cmd
+            data: { value: Input.Back }
+            icon: mdi:keyboard-return
+            column: 1
+            row: 4
+          - entity: script.kodi_cmd
+            data: { value: Input.Down }
+            icon: mdi:arrow-down
+            column: 2
+            row: 4
+          - entity: script.kodi_tvshow
+            icon: mdi:volume-off
+            column: 3
+            row: 4
+            
+    # Moods
+    script.remote_control_moods:
+      custom_ui_state_card: state-card-tiles
+      config:
+        columns: 5
+        row_height: 75px
+        column_width: 62px
+        gap: 15px
+        color: '#555B65'
+        #color: 'var(--paper-card-background-color)'
+        color_on: '#D5D619'
+        color_off: '#BBBEC2'
+        entities:
+          - entity: script.kodi_play_something
+            icon: mdi:library-music
+            column: 1
+            row: 1          
+          - entity: script.kodi_addon
+            data: { value: plugin.audio.rainymood.com }
+            icon: mdi:weather-lightning-rainy
+            column: 2
+            row: 1
+          - entity: script.kodi_play_playlist
+            data: { value: 1 }
+            label: '80s'
+            column: 3
+            row: 1
+          - entity: script.kodi_play_tvshow01
+            icon: mdi:tree
+            column: 4
+            row: 1
+          - entity: switch.mode_developer
+            icon: mdi:code-braces
+            column: 5
+            row: 1
+          - entity: switch.mode_kodi
+            icon: mdi:kodi
+            column: 6
+            row: 1
+            
+##################################################
+## Groups
+##################################################
+
+group:
+  remote_control_kodi:
+    name: Kodi
+    entities:
+      - sensor.kodi_template
+      - script.remote_control_kodi
+      - input_number.kodi_volume
+      
+  remote_control_moods:
+    name: Moods
+    entities:
+      - script.remote_control_moods
+
+
+##################################################
+## Scripts
+##################################################
+            
+script:
+  
+  remote_control_kodi:
+    sequence:
+  
+  remote_control_moods:
+    sequence:

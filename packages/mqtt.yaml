@@ -1,0 +1,4 @@
+mqtt:
+  broker: 127.0.0.1
+  password: !secret mqtt_password
+  username: !secret mqtt_username

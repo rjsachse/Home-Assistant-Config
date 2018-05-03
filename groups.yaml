@@ -1,0 +1,26 @@
+# Example configuration.yaml entry
+
+default_view:
+  name: Home
+  icon: mdi:home
+  view: yes
+  entities:
+    - group.lighting
+    - group.remote_control_kodi
+
+remote_kodi:
+  view: yes
+  name: Remote
+  icon: mdi:remote
+  entities:
+    - group.remote_control_kodi
+    - group.remote_control_moods
+
+lighting:
+  view: yes
+  icon: mdi:lightbulb-on
+  name: Lighting
+  entities:
+    - light.kitchen
+    - light.lounge
+    - light.bedroom

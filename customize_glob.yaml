@@ -1,0 +1,22 @@
+## https://github.com/andrey-git/home-assistant-custom-ui
+
+  "light.*":
+    custom_ui_state_card: state-card-custom-ui
+    state_card_mode: break-slider
+    stretch_slider: true
+    hide_control: false
+    hidden: false
+    show_last_changed: true
+    theme: happy
+    slider_theme:
+      min: 10
+      max: 200
+      pin: true
+      off_when_min: false
+      report_when_not_changed: false
+
+  "*.*":
+    custom_ui_state_card: state-card-custom-ui
+    #show_last_changed: true
+    hidden: false
+

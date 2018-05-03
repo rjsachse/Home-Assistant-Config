@@ -1,89 +1,77 @@
 homeassistant:
+  # Name of the location where Home Assistant is running
   name: Home
+  # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
   unit_system: metric
-  time_zone: !secret time_zone
-  customize: !include config/customize.yaml
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone:  !secret time_zone
+  # Customization file
+  customize: !include customize.yaml
 
-frontend:
-  extra_html_url:
-    - /local/custom_ui/state-card-floorplan.html
-    - /local/custom_ui/state-card-tiles.html
-  extra_html_url_es5:
-    - /local/custom_ui/state-card-tiles_es5.html
+  customize_glob: !include customize_glob.yaml
+  packages: !include_dir_named packages/
 
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend: !include frontend.yaml
+
+# Enables configuration UI
 config:
 
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
 
-# Mosquitto MQTT Broker
-mqtt:
-  broker: 127.0.0.1
-  port: 1883
-  protocol: 3.1
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+# Discover some devices automatically
+discovery:
 
+# Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
+# Enables support for tracking state changes over time
 history:
 
+# View all events in a logbook
 logbook:
 
+# Enables a map showing the location of tracked devices
 map:
 
+# Track the sun
 sun:
 
+# Weather prediction
+sensor:
+  - platform: yr
+
+# Text to speech
 tts:
   - platform: google
 
+# Cloud
 cloud:
 
-switch:
-  - platform: deluge
-    host: 192.168.0.104
-    port: 8080
-    username: !secret torrent_username
-    password: !secret torrent_password
+customizer:
+  custom_ui: local
 
-notify:
-  - platform: kodi
-    name: Kodi-notify
-    host: 192.168.0.104
-    port: 8080
-    username: !secret mp_username
-    password: !secret mp_password
-
-# Media Player
-media_player:
-  - platform: kodi
-    name: Kodi
-    host: 192.168.0.104
-    port: 8080
-    username: !secret mp_username
-    password: !secret mp_password
-
-binary_sensor:
-  - platform: mqtt
-    state_topic: dummy/floorplan/sensor
-    name: Floorplan
-
-input_boolean:
-  dummy_tiles:
-  switch1:
-
-panel_custom:
-  - name: floorplan
-    sidebar_title: Floorplan
-    sidebar_icon: mdi:home
-    url_path: floorplan
-    config: !include config/floorplan.yaml
-
-panel_iframe: !include config/panel.yaml
-sensor: !include config/sensors.yaml
-light: !include config/lights.yaml
-group: !include config/groups.yaml
-automation: !include config/automations.yaml
-script: !include config/scripts.yaml
+group: !include groups.yaml
+#automation: !include automations.yaml
+script: !include scripts.yaml
