@@ -1,0 +1,13 @@
+# Example configuration.yaml entry
+zone:
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: !secret zone_radius
+    icon: mdi:home
+
+  - name: !secret zone1_name
+    latitude: !secret zone1_latitude
+    longitude: !secret zone1_longitude
+    radius: !secret zone_radius
+    icon: mdi:worker

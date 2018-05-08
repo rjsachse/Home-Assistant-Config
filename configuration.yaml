@@ -42,6 +42,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - yeelight
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -71,6 +73,25 @@ cloud:
 
 customizer:
   custom_ui: local
+
+panel_iframe:
+  kodi:
+    title: 'Kodi'
+    url: 'http://192.168.43.206:8080/'
+    icon: mdi:kodi
+  milighthub:
+    title: 'Milight Hub'
+    url: 'http://192.168.43.206:88/'
+    icon: mdi:lightbulb-on
+
+weblink:
+  entities:
+    - name: Kodi Web
+      url: http://192.168.43.206:8080
+      icon: mdi:kodi
+    - name: Milight Hub
+      url: http://192.168.43.206:88
+      icon: mdi:lightbulb-on
 
 group: !include groups.yaml
 #automation: !include automations.yaml

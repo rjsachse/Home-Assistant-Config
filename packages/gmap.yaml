@@ -1,0 +1,4 @@
+device_tracker:
+  - platform: google_maps
+    username: !secret Gmaps_user
+    password: !secret Gmaps_pass

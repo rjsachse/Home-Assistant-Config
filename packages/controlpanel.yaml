@@ -22,72 +22,96 @@ homeassistant:
       custom_ui_state_card: state-card-tiles
       config:
         columns: 3
-        row_height: 75px
-        column_width: 62px
-        gap: 15px
+        row_height: 60px
+        column_width: 60px
+        gap: 10px
         color: '#555B65'
         entities:
           # Line 1
-          - entity: script.kodi_play_something
-            icon: mdi:library-music
+          - entity: script.kodi_input_cmd
+            data: { value: osd }
+            icon: mdi:apple-keyboard-control
             column: 1
             row: 1
-          - entity: script.kodi_tvshows
-            icon: mdi:mdi:movie
+          - entity: script.kodi_input_cmd
+            data: { value: home }
+            icon: mdi:home
             column: 2
             row: 1
-          - entity: script.kodi_tv_off
-            icon: mdi:mdi:power
+          - entity: script.kodi_input_cmd
+            data: { value: stop }
+            icon: mdi:stop
             column: 3
             row: 1
-          
+
           # Line 2
-          - entity: script.kodi_home
-            icon: mdi:home
+          - entity: script.kodi_input_cmd
+            data: { value: stepback }
+            icon: mdi:skip-backward
             column: 1
             row: 2
-          - entity: script.kodi_cmd
-            data: { value: Input.Up }
+          - entity: script.kodi_input_cmd
+            data: { value: Input.Left }
+            icon: mdi:play-pause
+            column: 2
+            row: 2
+          - entity: script.kodi_input_cmd
+            data: { value: stepforward }
+            icon: mdi:skip-forward
+            column: 3
+            row: 2
+          
+          # Line 3
+          - entity: script.kodi_input_cmd
+            data: { value: contextmenu }
+            icon: mdi:menu
+            column: 1
+            row: 3
+          - entity: script.kodi_input_cmd
+            data: { value: up }
             icon: mdi:arrow-up
             column: 2
-            row: 2
-          - entity: script.kodi_playpause
-            icon: mdi:play-pause
-            column: 3
-            row: 2
-            
-          # Line 3
-          - entity: script.kodi_cmd
-            data: { value: Input.Left }
-            icon: mdi:arrow-left
-            column: 1
             row: 3
-          - entity: script.kodi_cmd
-            data: { value: Input.ExecuteAction }
-            icon: mdi:circle-outline
-            column: 2
-            row: 3
-          - entity: script.kodi_cmd
-            data: { value: Input.Right }
-            icon: mdi:arrow-right
+          - entity: script.kodi_input_cmd
+            data: { value: info }
+            icon: mdi:information-variant
+            #icon: mdi:information-outline
             column: 3
             row: 3
             
           # Line 4
-          - entity: script.kodi_cmd
-            data: { value: Input.Back }
-            icon: mdi:keyboard-return
+          - entity: script.kodi_input_cmd
+            data: { value: left }
+            icon: mdi:arrow-left
             column: 1
             row: 4
-          - entity: script.kodi_cmd
-            data: { value: Input.Down }
-            icon: mdi:arrow-down
+          - entity: script.kodi_input_cmd
+            data: { value: select }
+            icon: mdi:circle-outline
             column: 2
             row: 4
-          - entity: script.kodi_tvshow
-            icon: mdi:volume-off
+          - entity: script.kodi_input_cmd
+            data: { value: right }
+            icon: mdi:arrow-right
             column: 3
             row: 4
+            
+          # Line 5
+          - entity: script.kodi_input_cmd
+            data: { value: back }
+            icon: mdi:keyboard-return
+            column: 1
+            row: 5
+          - entity: script.kodi_input_cmd
+            data: { value: down }
+            icon: mdi:arrow-down
+            column: 2
+            row: 5
+          - entity: script.kodi_input_cmd
+            data: { value: mute }
+            icon: mdi:volume-off
+            column: 3
+            row: 5
             
     # Moods
     script.remote_control_moods:

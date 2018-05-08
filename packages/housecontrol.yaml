@@ -1,0 +1,106 @@
+# Example configuration.yaml entry
+input_select:
+  house:
+    name: House Control
+    options:
+     - Morning mode
+     - Movie mode
+     - Night mode
+     - Sleep mode
+     - No mode
+    initial: No mode
+    icon: mdi:castle 
+
+scene:
+  - name: Sleep
+    entities:
+      light.bedroom: on
+      light.kitchen:
+        state: on
+        brightness: 1
+        effect: night_mode
+      light.lounge:
+        state: on
+        brightness: 1
+        effect: night_mode
+
+script: 
+  # Turns on the bedroom lights and then the living room lights 1 minute later
+  bedtime:
+    alias: Bed Time
+    sequence:
+      - alias: Kitchen night light
+        service: light.turn_on
+        data:
+          entity_id: light.kitchen
+          brightness: 1
+          effect: night_mode
+      - alias: Lounge night light
+        service: light.turn_on
+        data:
+          entity_id: light.lounge
+          brightness: 1
+          effect: night_mode 
+      - alias: Bedroom sleep light
+        service: light.turn_on
+        data:
+          entity_id: light.bedroom
+          color_temp: 350
+          brightness: 255
+      - delay:
+          seconds: 1
+      - alias: Bedlight timer
+        service: light.turn_on
+        data:
+          entity_id: light.bedroom 
+          color_temp: 350
+          transition: 300
+          brightness: 1
+      - delay:
+          seconds: 302
+      - alias: Bedlight sleep
+        service: light.turn_off
+        data:
+          entity_id: light.bedroom
+
+automation:
+- alias: Sleep mode
+  trigger:
+    platform: state
+    entity_id: input_select.motion_house
+    to: 'Sleep mode'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.bedtime
+    
+- alias: Auto light on
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:45:00"
+  condition:
+    condition: state
+    entity_id: group.all_devices
+    state: home
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.lounge 
+      brightness: 255
+
+- alias: Auto light off
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "+01:45:00"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.lounge 
+        brightness: 255
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen
+        brightness: 255
+
+

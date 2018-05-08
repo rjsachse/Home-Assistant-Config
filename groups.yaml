@@ -1,6 +1,6 @@
 # Example configuration.yaml entry
 
-default_view:
+defaul_view:
   name: Home
   icon: mdi:home
   view: yes
